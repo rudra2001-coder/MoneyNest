@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.rudra.moneynest.ui.MainScreen
 import com.rudra.moneynest.ui.addtransaction.AddTransactionScreen
 import com.rudra.moneynest.ui.billtracker.BillTrackerScreen
 import com.rudra.moneynest.ui.category.CategoryScreen
@@ -26,8 +27,8 @@ fun NavGraph() {
         composable(Screen.Pin.route) {
             PinScreen(navController = navController)
         }
-        composable(Screen.Dashboard.route) {
-            DashboardScreen(navController = navController)
+        composable(Screen.Main.route) {
+            MainScreen(mainNavController = navController)
         }
         composable(Screen.AddTransaction.route) {
             AddTransactionScreen(onTransactionAdded = { navController.popBackStack() })

@@ -96,6 +96,7 @@ dependencies {
     // MPAndroidChart
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 
+    //biometric
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
 
     // Testing

@@ -68,7 +68,7 @@ fun PinScreen(
 
     when (pinState) {
         is PinState.PinVerified -> {
-            navController.navigate(Screen.Dashboard.route) {
+            navController.navigate(Screen.Main.route) {
                 popUpTo(Screen.Pin.route) { inclusive = true }
             }
         }

@@ -35,7 +35,7 @@ fun SecurityScreen(
 
     LaunchedEffect(isAuthenticated) {
         if (isAuthenticated) {
-            navController.navigate(Screen.Dashboard.route) {
+            navController.navigate(Screen.Main.route) {
                 popUpTo(Screen.Security.route) { inclusive = true }
             }
         }
