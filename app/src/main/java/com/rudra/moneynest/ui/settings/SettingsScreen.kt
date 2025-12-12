@@ -36,11 +36,22 @@ fun SettingsScreen(
     val isBiometricLockEnabled by viewModel.isBiometricLockEnabled.collectAsState()
     val currency by viewModel.currency.collectAsState()
     val isCurrencyDialogShown by viewModel.isCurrencyDialogShown.collectAsState()
+    val isResetAppDialogShown by viewModel.isResetAppDialogShown.collectAsState()
 
     if (isCurrencyDialogShown) {
         CurrencySelectionDialog(
             onCurrencySelected = viewModel::onCurrencyChange,
             onDismiss = viewModel::dismissCurrencyDialog
+        )
+    }
+
+    if (isResetAppDialogShown) {
+        ResetAppDialog(
+            onConfirm = {
+                viewModel.resetApp()
+                viewModel.dismissResetAppDialog()
+            },
+            onDismiss = viewModel::dismissResetAppDialog
         )
     }
 
@@ -64,7 +75,10 @@ fun SettingsScreen(
                 )
             }
             item {
-                DataSettingsCard(navController = navController)
+                DataSettingsCard(
+                    navController = navController,
+                    onResetAppClick = viewModel::showResetAppDialog
+                )
             }
             item {
                 GeneralSettingsCard(
@@ -95,7 +109,10 @@ private fun SecuritySettingsCard(
 }
 
 @Composable
-private fun DataSettingsCard(navController: NavController) {
+private fun DataSettingsCard(
+    navController: NavController,
+    onResetAppClick: () -> Unit
+) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = "Data Management", style = androidx.compose.material3.MaterialTheme.typography.titleLarge)
@@ -103,7 +120,7 @@ private fun DataSettingsCard(navController: NavController) {
             SettingItem(title = "Backup Data", onClick = { /* TODO */ })
             SettingItem(title = "Restore Data", onClick = { /* TODO */ })
             SettingItem(title = "Generate Report", onClick = { navController.navigate(Screen.Report.route) })
-            SettingItem(title = "Reset App", onClick = { /* TODO */ })
+            SettingItem(title = "Reset App", onClick = onResetAppClick)
         }
     }
 }
@@ -146,7 +163,7 @@ private fun CurrencySelectionDialog(
     onCurrencySelected: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
-    val currencies = listOf("USD", "EUR", "GBP", "INR","BDT") // Add more currencies as needed
+    val currencies = listOf("USD", "EUR", "GBP", "INR") // Add more currencies as needed
 
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -165,6 +182,28 @@ private fun CurrencySelectionDialog(
             }
         },
         confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text("Cancel")
+            }
+        }
+    )
+}
+
+@Composable
+private fun ResetAppDialog(
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(text = "Reset App") },
+        text = { Text("Are you sure you want to reset the app? All of your data will be lost.") },
+        confirmButton = {
+            TextButton(onClick = onConfirm) {
+                Text("Reset")
+            }
+        },
+        dismissButton = {
             TextButton(onClick = onDismiss) {
                 Text("Cancel")
             }

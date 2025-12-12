@@ -24,4 +24,7 @@ interface CategoryDao {
 
     @Query("SELECT * FROM categories WHERE id = :id")
     fun getCategoryById(id: Long): Flow<Category>
+
+    @Query("DELETE FROM categories")
+    suspend fun clear()
 }

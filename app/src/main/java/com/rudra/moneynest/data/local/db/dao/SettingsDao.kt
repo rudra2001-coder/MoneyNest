@@ -17,4 +17,7 @@ interface SettingsDao {
 
     @Query("SELECT * FROM settings WHERE id = 1")
     fun getSettings(): Flow<Settings>
+
+    @Query("DELETE FROM settings")
+    suspend fun clear()
 }
