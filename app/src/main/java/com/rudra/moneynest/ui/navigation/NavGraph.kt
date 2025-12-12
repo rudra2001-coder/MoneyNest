@@ -16,6 +16,7 @@ import com.rudra.moneynest.ui.networth.NetWorthScreen
 import com.rudra.moneynest.ui.report.ReportScreen
 import com.rudra.moneynest.ui.security.PinScreen
 import com.rudra.moneynest.ui.security.SecurityScreen
+import com.rudra.moneynest.ui.settings.SettingsScreen
 
 @Composable
 fun NavGraph() {
@@ -54,6 +55,9 @@ fun NavGraph() {
         }
         composable(Screen.DataExport.route) {
             DataExportScreen()
+        }
+        composable(Screen.Settings.route) {
+            SettingsScreen(navController = navController)
         }
     }
 }
