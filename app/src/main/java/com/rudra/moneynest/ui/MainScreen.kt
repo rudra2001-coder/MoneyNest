@@ -72,7 +72,7 @@ fun MainScreen(mainNavController: NavController) {
         ) {
             composable(Screen.Dashboard.route) { DashboardScreen(navController = mainNavController) }
             composable(Screen.Explorer.route) { ExplorerScreen(navController = mainNavController) }
-            composable(Screen.Settings.route) { SettingsScreen() }
+            composable(Screen.Settings.route) { SettingsScreen(navController = mainNavController) }
         }
     }
 }
