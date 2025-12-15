@@ -55,4 +55,6 @@ interface Repository {
     fun getSettings(): Flow<Settings>
     suspend fun insertSettings(settings: Settings)
     suspend fun updateSettings(settings: Settings)
+
+    suspend fun clearAllTables()
 }

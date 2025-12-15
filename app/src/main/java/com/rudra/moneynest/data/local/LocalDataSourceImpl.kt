@@ -71,4 +71,14 @@ class LocalDataSourceImpl @Inject constructor(
     override fun getSettings(): Flow<Settings> = settingsDao.getSettings()
     override suspend fun insertSettings(settings: Settings) = settingsDao.insert(settings)
     override suspend fun updateSettings(settings: Settings) = settingsDao.update(settings)
+
+    override suspend fun clearAllTables() {
+        transactionDao.clear()
+        categoryDao.clear()
+        monthlyBudgetDao.clear()
+        goalDao.clear()
+        recurringBillDao.clear()
+        netWorthItemDao.clear()
+        settingsDao.clear()
+    }
 }

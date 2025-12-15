@@ -31,11 +31,20 @@ fun SecurityScreen(
     navController: NavController
 ) {
     val isAuthenticated by viewModel.isAuthenticated.collectAsState()
+    val isBiometricLockEnabled by viewModel.isBiometricLockEnabled.collectAsState()
     val context = LocalContext.current as FragmentActivity
 
     LaunchedEffect(isAuthenticated) {
         if (isAuthenticated) {
             navController.navigate(Screen.Main.route) {
+                popUpTo(Screen.Security.route) { inclusive = true }
+            }
+        }
+    }
+
+    LaunchedEffect(isBiometricLockEnabled) {
+        if (!isBiometricLockEnabled) {
+            navController.navigate(Screen.Pin.route) {
                 popUpTo(Screen.Security.route) { inclusive = true }
             }
         }
@@ -49,10 +58,12 @@ fun SecurityScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Button(onClick = { viewModel.authenticate(context as AppCompatActivity) }) {
-                Text("Unlock with Biometrics")
+            if (isBiometricLockEnabled) {
+                Button(onClick = { viewModel.authenticate(context as AppCompatActivity) }) {
+                    Text("Unlock with Biometrics")
+                }
+                Spacer(modifier = Modifier.height(16.dp))
             }
-            Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = { navController.navigate(Screen.Pin.route) }) {
                 Text("Use PIN")
             }

@@ -24,4 +24,7 @@ interface GoalDao {
 
     @Query("SELECT * FROM goals WHERE id = :id")
     fun getGoalById(id: Long): Flow<Goal>
+
+    @Query("DELETE FROM goals")
+    suspend fun clear()
 }

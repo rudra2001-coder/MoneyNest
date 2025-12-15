@@ -55,3 +55,15 @@ fun MoneyNestTheme(
       content = content
     )
 }
+object GradientBrush {
+    @Composable
+    fun primaryGradient() = androidx.compose.ui.graphics.Brush.linearGradient(
+        colors = listOf(
+            MaterialTheme.colorScheme.primary,
+            MaterialTheme.colorScheme.primary.copy(alpha = 0.8F),
+            MaterialTheme.colorScheme.secondary.copy(alpha = 0.9F)
+        ),
+        start = androidx.compose.ui.geometry.Offset.Zero,
+        end = androidx.compose.ui.geometry.Offset.Infinite
+    )
+}

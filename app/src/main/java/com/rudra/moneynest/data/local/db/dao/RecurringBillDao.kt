@@ -24,4 +24,7 @@ interface RecurringBillDao {
 
     @Query("SELECT * FROM recurring_bills WHERE id = :id")
     fun getRecurringBillById(id: Long): Flow<RecurringBill>
+
+    @Query("DELETE FROM recurring_bills")
+    suspend fun clear()
 }

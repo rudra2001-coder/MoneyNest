@@ -61,4 +61,6 @@ class RepositoryImpl @Inject constructor(
     override fun getSettings(): Flow<Settings> = localDataSource.getSettings()
     override suspend fun insertSettings(settings: Settings) = localDataSource.insertSettings(settings)
     override suspend fun updateSettings(settings: Settings) = localDataSource.updateSettings(settings)
+
+    override suspend fun clearAllTables() = localDataSource.clearAllTables()
 }

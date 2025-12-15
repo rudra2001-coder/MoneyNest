@@ -13,8 +13,10 @@ import com.rudra.moneynest.ui.export.DataExportScreen
 import com.rudra.moneynest.ui.goals.GoalScreen
 import com.rudra.moneynest.ui.monthlybudget.MonthlyBudgetScreen
 import com.rudra.moneynest.ui.networth.NetWorthScreen
+import com.rudra.moneynest.ui.report.ReportScreen
 import com.rudra.moneynest.ui.security.PinScreen
 import com.rudra.moneynest.ui.security.SecurityScreen
+import com.rudra.moneynest.ui.settings.SettingsScreen
 
 @Composable
 fun NavGraph() {
@@ -29,6 +31,9 @@ fun NavGraph() {
         }
         composable(Screen.Main.route) {
             MainScreen(mainNavController = navController)
+        }
+        composable(Screen.Report.route) {
+            ReportScreen()
         }
         composable(Screen.AddTransaction.route) {
             AddTransactionScreen(onTransactionAdded = { navController.popBackStack() })
@@ -50,6 +55,9 @@ fun NavGraph() {
         }
         composable(Screen.DataExport.route) {
             DataExportScreen()
+        }
+        composable(Screen.Settings.route) {
+            SettingsScreen(navController = navController)
         }
     }
 }

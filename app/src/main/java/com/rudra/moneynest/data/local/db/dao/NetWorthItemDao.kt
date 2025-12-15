@@ -24,4 +24,7 @@ interface NetWorthItemDao {
 
     @Query("SELECT * FROM net_worth_items WHERE id = :id")
     fun getNetWorthItemById(id: Long): Flow<NetWorthItem>
+
+    @Query("DELETE FROM net_worth_items")
+    suspend fun clear()
 }

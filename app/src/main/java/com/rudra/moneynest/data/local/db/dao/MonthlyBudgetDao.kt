@@ -17,4 +17,7 @@ interface MonthlyBudgetDao {
 
     @Query("SELECT * FROM monthly_budgets WHERE month = :month")
     fun getMonthlyBudget(month: String): Flow<MonthlyBudget>
+
+    @Query("DELETE FROM monthly_budgets")
+    suspend fun clear()
 }
